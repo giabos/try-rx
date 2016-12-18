@@ -12,8 +12,7 @@ import java.util.ArrayList;
 /**
  * Unit test for simple App.
  */
-public class AppTest
-        extends TestCase {
+public class AppTest extends TestCase {
     /**
      * Create the test case
      *
@@ -34,16 +33,24 @@ public class AppTest
 
     public void testApp() {
 
-        final List<Integer> list = new ArrayList<Integer>(Arrays.asList(1,2,3,5,8,13,21));
+        final List<Integer> list = new ArrayList<Integer>(Arrays.asList(1, 2, 3, 5, 8, 13, 21));
         Observable<Integer> obs = Observable.from(list);
-        
+
         List<Integer> expectedData = (List<Integer>)((ArrayList)list).clone();
-        
+
         obs.subscribe(i -> {
             int expected = expectedData.remove(0);
             assertEquals(expected, (int)i);
         }, e -> fail(e.toString()));
+
+
+    }
+    
+    public void testObj2 () {
+     
+        Observable<String> obs = Observable.just("aaa");
         
-        
+        obs.subscribe(s -> assertEquals("aaa", s));
+    
     }
 }
